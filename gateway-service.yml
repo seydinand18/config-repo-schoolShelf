@@ -1,8 +1,9 @@
-# gateway-service.yml
+# application.yml
 
 server:
     port: 8080
 
+# Configuration pour la découverte des services avec Eureka
 eureka:
     client:
         service-url:
@@ -10,18 +11,24 @@ eureka:
     instance:
         prefer-ip-address: true
 
-# Configuration spécifique au service
-zuul:
-    routes:
-        library-service:
-            path: /library/**
-            url: http://library-service:8081
-        user-service:
-            path: /users/**
-            url: http://user-service:8082
-        loan-service:
-            path: /loans/**
-            url: http://loan-service:8083
-        notification-service:
-            path: /notifications/**
-            url: http://notification-service:8084
+# Configuration des routes pour Spring Cloud Gateway
+spring:
+    cloud:
+        gateway:
+            routes:
+                -   id: library-service
+                    uri: lb://library-service  # Utilisation d'un équilibreur de charge pour le service library
+                    predicates:
+                        - Path=/library/**  # Routage basé sur le chemin /library/**
+                -   id: user-service
+                    uri: lb://user-service  # Utilisation d'un équilibreur de charge pour le service user
+                    predicates:
+                        - Path=/users/**  # Routage basé sur le chemin /users/**
+                -   id: loan-service
+                    uri: lb://loan-service  # Utilisation d'un équilibreur de charge pour le service loan
+                    predicates:
+                        - Path=/loans/**  # Routage basé sur le chemin /loans/**
+                -   id: notification-service
+                    uri: lb://notification-service  # Utilisation d'un équilibreur de charge pour le service notification
+                    predicates:
+                        - Path=/notifications/**  # Routage basé sur le chemin /notifications/**
