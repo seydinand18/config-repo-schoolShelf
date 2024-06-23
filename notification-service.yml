@@ -1,0 +1,20 @@
+# notification-service.yml
+
+server:
+    port: 8084
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-service:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+# Configuration spécifique au service
+notification:
+    welcome-message: "Welcome to the Notification Service"
+    email:
+        host: smtp.maildev.local
+        port: 1025
+        username: user
+        password: password

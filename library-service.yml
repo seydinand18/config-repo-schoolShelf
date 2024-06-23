@@ -1,0 +1,19 @@
+# library-service.yml
+
+server:
+    port: 8081
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-service:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+# Configuration spécifique au service
+library:
+    welcome-message: "Welcome to the Library Service"
+    database:
+        url: jdbc:mysql://localhost:3306/library
+        username: user
+        password: password

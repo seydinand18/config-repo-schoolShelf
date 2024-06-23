@@ -1,0 +1,27 @@
+# gateway-service.yml
+
+server:
+    port: 8080
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-service:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+# Configuration spécifique au service
+zuul:
+    routes:
+        library-service:
+            path: /library/**
+            url: http://library-service:8081
+        user-service:
+            path: /users/**
+            url: http://user-service:8082
+        loan-service:
+            path: /loans/**
+            url: http://loan-service:8083
+        notification-service:
+            path: /notifications/**
+            url: http://notification-service:8084
