@@ -1,0 +1,19 @@
+# loan-service.yml
+
+server:
+    port: 8083
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-service:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+# Configuration spécifique au service
+loan:
+    welcome-message: "Welcome to the Loan Service"
+    database:
+        url: jdbc:mysql://localhost:3306/loans
+        username: user
+        password: password

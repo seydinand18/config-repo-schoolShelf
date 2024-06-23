@@ -1,0 +1,19 @@
+# user-service.yml
+
+server:
+    port: 8082
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://eureka-service:8761/eureka/
+    instance:
+        prefer-ip-address: true
+
+# Configuration spécifique au service
+user:
+    welcome-message: "Welcome to the User Service"
+    database:
+        url: jdbc:mysql://localhost:3306/users
+        username: user
+        password: password
