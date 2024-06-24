@@ -1,9 +1,22 @@
 # application.yml
 
+h2:
+    console:
+        enabled: true
+
+cloud:
+    config:
+        enabled: true
+    discovery:
+        enabled: true
+config:
+    import: optional:configserver:http://localhost:9999
+
 eureka:
     client:
         service-url:
-            defaultZone: http://eureka-service:8761/eureka/
+            defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761/eureka/}
+
     instance:
         prefer-ip-address: true
 
@@ -12,6 +25,7 @@ management:
         web:
             exposure:
                 include: "*"
-    endpoint:
-        health:
-            show-details: ALWAYS
+global:
+    params:
+        p1: 9999
+        p2: 8888
